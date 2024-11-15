@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: orderdb
+      POSTGRES_DB: postgres
       POSTGRES_USER: yourusername
       POSTGRES_PASSWORD: yourpassword
     ports:
@@ -15,6 +15,6 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/orderdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
       SPRING_DATASOURCE_USERNAME: yourusername
       SPRING_DATASOURCE_PASSWORD: yourpassword
