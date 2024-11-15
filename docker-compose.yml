@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: orderdb
+      POSTGRES_USER: yourusername
+      POSTGRES_PASSWORD: yourpassword
+    ports:
+      - "5432:5432"
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/orderdb
+      SPRING_DATASOURCE_USERNAME: yourusername
+      SPRING_DATASOURCE_PASSWORD: yourpassword
