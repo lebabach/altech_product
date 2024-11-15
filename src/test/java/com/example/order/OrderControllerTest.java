@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,11 +40,15 @@ public class OrderControllerTest {
     public void setUp() {
         orderDTO = new OrderDTO();
         orderDTO.setId(1L);
-        orderDTO.setCustomerName("John Doe");
+        orderDTO.setCustomerId(1L);
         orderDTO.setProduct("Laptop");
         orderDTO.setQuantity(1);
         orderDTO.setPrice(999.99);
         orderDTO.setStatus("Shipped");
+        orderDTO.setCreatedBy("admin");
+        orderDTO.setUpdatedBy("admin");
+        orderDTO.setCreatedDate(LocalDateTime.now());
+        orderDTO.setUpdatedDate(LocalDateTime.now());
     }
 
     @Test
@@ -53,7 +58,7 @@ public class OrderControllerTest {
 
         mockMvc.perform(get("/api/orders"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].customerName").value("John Doe"));
+                .andExpect(jsonPath("$[0].customerId").value(1L));
     }
 
     @Test
@@ -62,7 +67,7 @@ public class OrderControllerTest {
 
         mockMvc.perform(get("/api/orders/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.customerName").value("John Doe"));
+                .andExpect(jsonPath("$.customerId").value(1L));
     }
 
     @Test
@@ -71,9 +76,9 @@ public class OrderControllerTest {
 
         mockMvc.perform(post("/api/orders")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"customerName\":\"John Doe\",\"product\":\"Laptop\",\"quantity\":1,\"price\":999.99,\"status\":\"Shipped\"}"))
+                        .content("{\"customerId\":1,\"product\":\"Laptop\",\"quantity\":1,\"price\":999.99,\"status\":\"Shipped\",\"createdBy\":\"admin\",\"updatedBy\":\"admin\",\"createdDate\":\"2023-10-10T10:00:00\",\"updatedDate\":\"2023-10-10T10:00:00\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.customerName").value("John Doe"));
+                .andExpect(jsonPath("$.customerId").value(1L));
     }
 
     @Test
@@ -82,9 +87,9 @@ public class OrderControllerTest {
 
         mockMvc.perform(put("/api/orders/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"customerName\":\"John Doe\",\"product\":\"Laptop\",\"quantity\":1,\"price\":999.99,\"status\":\"Shipped\"}"))
+                        .content("{\"customerId\":1,\"product\":\"Laptop\",\"quantity\":1,\"price\":999.99,\"status\":\"Shipped\",\"createdBy\":\"admin\",\"updatedBy\":\"admin\",\"createdDate\":\"2023-10-10T10:00:00\",\"updatedDate\":\"2023-10-10T10:00:00\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.customerName").value("John Doe"));
+                .andExpect(jsonPath("$.customerId").value(1L));
     }
 
     @Test

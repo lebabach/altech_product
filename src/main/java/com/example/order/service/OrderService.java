@@ -8,6 +8,7 @@ import com.example.order.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,8 @@ public class OrderService {
 
     public OrderDTO createOrder(OrderDTO orderDTO) {
         Order order = orderMapper.orderDTOToOrder(orderDTO);
+        order.setCreatedDate(LocalDateTime.now());
+        order.setUpdatedDate(LocalDateTime.now());
         Order savedOrder = orderRepository.save(order);
         return orderMapper.orderToOrderDTO(savedOrder);
     }
@@ -42,11 +45,8 @@ public class OrderService {
     public OrderDTO updateOrder(Long id, OrderDTO orderDTO) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new OrderNotFoundException("Order not found with id " + id));
-        order.setCustomerName(orderDTO.getCustomerName());
-        order.setProduct(orderDTO.getProduct());
-        order.setQuantity(orderDTO.getQuantity());
-        order.setPrice(orderDTO.getPrice());
-        order.setStatus(orderDTO.getStatus());
+        orderMapper.updateOrderFromDTO(orderDTO, order);
+        order.setUpdatedDate(LocalDateTime.now());
         Order updatedOrder = orderRepository.save(order);
         return orderMapper.orderToOrderDTO(updatedOrder);
     }

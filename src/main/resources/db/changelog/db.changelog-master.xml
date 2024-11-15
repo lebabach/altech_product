@@ -10,34 +10,51 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="customer_name" type="varchar(255)"/>
+            <column name="customer_id" type="bigint"/>
             <column name="product" type="varchar(255)"/>
             <column name="quantity" type="int"/>
             <column name="price" type="decimal(10,2)"/>
             <column name="status" type="varchar(50)"/>
+            <column name="created_by" type="varchar(255)"/>
+            <column name="updated_by" type="varchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="updated_date" type="timestamp"/>
         </createTable>
     </changeSet>
+
     <changeSet id="2" author="bachlb">
         <insert tableName="orders">
-            <column name="customer_name" value="John Doe"/>
+            <column name="customer_id" value="1"/>
             <column name="product" value="Laptop"/>
             <column name="quantity" value="1"/>
             <column name="price" value="999.99"/>
             <column name="status" value="Shipped"/>
+            <column name="created_by" value="admin"/>
+            <column name="updated_by" value="admin"/>
+            <column name="created_date" value="2023-10-10T10:00:00"/>
+            <column name="updated_date" value="2023-10-10T10:00:00"/>
         </insert>
         <insert tableName="orders">
-            <column name="customer_name" value="Jane Smith"/>
+            <column name="customer_id" value="2"/>
             <column name="product" value="Smartphone"/>
             <column name="quantity" value="2"/>
             <column name="price" value="499.99"/>
             <column name="status" value="Processing"/>
+            <column name="created_by" value="admin"/>
+            <column name="updated_by" value="admin"/>
+            <column name="created_date" value="2023-10-10T10:00:00"/>
+            <column name="updated_date" value="2023-10-10T10:00:00"/>
         </insert>
         <insert tableName="orders">
-            <column name="customer_name" value="Alice Johnson"/>
+            <column name="customer_id" value="3"/>
             <column name="product" value="Tablet"/>
             <column name="quantity" value="3"/>
             <column name="price" value="299.99"/>
             <column name="status" value="Delivered"/>
+            <column name="created_by" value="admin"/>
+            <column name="updated_by" value="admin"/>
+            <column name="created_date" value="2023-10-10T10:00:00"/>
+            <column name="updated_date" value="2023-10-10T10:00:00"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

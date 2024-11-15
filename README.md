@@ -1,4 +1,6 @@
 # Order Management System
+## Init Data Liquibase
+![Init Data Liquibase](./InitData_liquibase.PNG)
 
 ## Deploy Your Spring Boot Application on AWS as Docker Containers
 
